@@ -3,6 +3,7 @@
 class DatabaseHelper {
 
     private $connection;
+    private $statement;
 
     public function __construct($config, $username = 'root', $password = 'toor')
     {
@@ -17,10 +18,32 @@ class DatabaseHelper {
 
     public function query($query, $queryParams=[])
     {
-        $statement = $this->connection->prepare($query);
+        $this->statement = $this->connection->prepare($query);
 
-        $statement->execute($queryParams);
+        $this->statement->execute($queryParams);
 
-        return $statement;
+        return $this;
+    }
+
+    public function findAll()
+    {
+        return $this->statement->fetchAll();
+
+    }
+
+    public function find()
+    {
+        return $this->statement->fetch();
+    }
+
+    public function findOrFail()
+    {
+        $result = $this->find();
+
+        if (!$result){
+            abort();
+        }
+
+        return $result;
     }
 }
