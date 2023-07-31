@@ -8,12 +8,12 @@ $databaseHelper = new DatabaseHelper($config['database']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $errors = [];
 
-    if (!Validator::isString($_POST['title'])){
-        $errors['title'] = 'Title is a require field';
+    if (!Validator::isAcceptableLength($_POST['title'], 5, 20)){
+        $errors['title'] = 'Title should be of length between 5 and 20';
     }
 
-    if (!Validator::isAcceptableLength($_POST['title'])){
-        $errors['title'] = 'Body is a require field';
+    if (!Validator::isAcceptableLength($_POST['body'], 5, 250)){
+        $errors['body'] = 'Body should be of length between 5 and 250';
     }
 
     if (empty($errors)) {
@@ -25,4 +25,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 }
 
-require "views/note-create.view.php";
+require "views/notes/create.view.php";
