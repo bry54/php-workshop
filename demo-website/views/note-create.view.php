@@ -11,19 +11,28 @@
                     <div class="border-b border-gray-900/10 pb-12">
 
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div class="sm:col-span-4">
+                            <div class="col-span-full">
                                 <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
                                 <div class="mt-2 w-full">
-                                        <input type="text" name="title" id="title" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        <input value="<?= $_POST['title'] ?? '' ?>"
+                                                type="text" name="title" id="title" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
+                                <?php if (isset($errors['title'])) : ?>
+                                    <p class="mt-3 text-sm leading-6 text-red-600"><?= $errors['title'] ?></p>
+                                <?php endif; ?>
                             </div>
 
                             <div class="col-span-full">
                                 <label for="body" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
                                 <div class="mt-2">
-                                    <textarea id="body" name="body" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                    <textarea
+                                            id="body" name="body" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        <?= $_POST['body'] ?? '' ?>
+                                    </textarea>
                                 </div>
-                                <p class="mt-3 text-sm leading-6 text-gray-600">Provide note description</p>
+                                <?php if (isset($errors['body'])) : ?>
+                                    <p class="mt-3 text-sm leading-6 text-red-600"><?= $errors['body'] ?></p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
